@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
 import time
-from authproxy import AuthServiceProxy
+from bitcoinrpc.authproxy import AuthServiceProxy
 import tweepy
-import random
 import urllib.request
 import json
 import re

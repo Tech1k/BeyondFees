@@ -1,4 +1,4 @@
-# CoreFeeHelper
+# BeyondcoinFeeHelper
 Muh Twitter feebot @CoreFeeHelper
 
 How to install:

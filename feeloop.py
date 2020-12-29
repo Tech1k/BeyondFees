@@ -13,11 +13,11 @@ if len(sys.argv) < 7:
     raise Exception('feeloop.py <RPC username> <RPC password> <oauth1> <oauth2> <token1> <token2>')
 
 while True:
-    bitcoin_req = "http://"+sys.argv[1]+":"+sys.argv[2]+"@127.0.0.1:8332"
+    bitcoin_req = "http://"+sys.argv[1]+":"+sys.argv[2]+"@127.0.0.1:10332"
     bitcoin = AuthServiceProxy(bitcoin_req)
 
     def get_rounded_feerate(result):
-        rate = str(int(result*1000000)/10.0)+" sat/byte "
+        rate = str(int(result*1000000)/10.0)+" bsat/byte "
         if len(re.split("\.", rate)[0]) == 1:
             rate = " "+rate
         return rate
@@ -33,7 +33,7 @@ while True:
         week = ["1wk:  ", bitcoin.estimatesmartfee(144*7, "ECONOMICAL")["feerate"]]
         mem_min = ["Min:  ", mempool_info["mempoolminfee"]]
 
-        bitstampprice = urllib.request.urlopen("https://www.bitstamp.net/api/v2/ticker/btcusd/").read()
+        bitstampprice = urllib.request.urlopen("https://www.bitstamp.net/api/v2/ticker/btcusd/").read() ### Change to CoinGecko
         latest_price = float(json.loads(bitstampprice)["last"])
         price_for_250 = latest_price/4 # Price for 250 byte tx
 
@@ -63,7 +63,7 @@ while True:
         if blockcount % 10 == 0:
             print("Shilling.")
             try:
-                tweet2 = "Tip me!\n\nhttps://tippin.me/@CoreFeeHelper\n\n{}".format(blockcount)
+                tweet2 = "Tip me!\n\nhttps://tippin.me/@BeyondFees\n\n{}".format(blockcount)
                 api.update_status(tweet2)
                 print("\n"+tweet2+"\n")
             except Exception as e:

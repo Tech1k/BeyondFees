@@ -33,8 +33,8 @@ while True:
         week = ["1wk:  ", bitcoin.estimatesmartfee(144*7, "ECONOMICAL")["feerate"]]
         mem_min = ["Min:  ", mempool_info["mempoolminfee"]]
 
-        bitstampprice = urllib.request.urlopen("https://www.bitstamp.net/api/v2/ticker/btcusd/").read() ### Change to CoinGecko
-        latest_price = float(json.loads(bitstampprice)["last"])
+        coingeckoprice = urllib.request.urlopen("https://api.coingecko.com/api/v3/simple/price?ids=beyondcoin&vs_currencies=usd").read() ### Change to CoinGecko
+        latest_price = float(json.loads(coingeckoprice)["beyondcoin"]["usd"])
         price_for_250 = latest_price/4 # Price for 250 byte tx
 
         tweet = ""

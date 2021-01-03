@@ -29,7 +29,6 @@ while True:
         six_hours = ["6h:   ", bitcoin.estimatesmartfee(6*6, "ECONOMICAL")["feerate"]]
         twelve_hours = ["12h:  ", bitcoin.estimatesmartfee(6*12, "ECONOMICAL")["feerate"]]
         day = ["1d:   ", bitcoin.estimatesmartfee(144, "ECONOMICAL")["feerate"]]
-        half_week = ["3d:   ", bitcoin.estimatesmartfee(int(144*3.5), "ECONOMICAL")["feerate"]]
         week = ["1wk:  ", bitcoin.estimatesmartfee(144*7, "ECONOMICAL")["feerate"]]
         mem_min = ["Min:  ", mempool_info["mempoolminfee"]]
 
@@ -38,12 +37,13 @@ while True:
         price_for_250 = latest_price/4 # Price for 250 byte tx
 
         tweet = ""
-        for estimate in [nextblock, hour, six_hours, twelve_hours, day, half_week, week, mem_min]:
+        for estimate in [nextblock, hour, six_hours, twelve_hours, day, week, mem_min]:
             tweet += estimate[0]+get_rounded_feerate(estimate[1]) + " ${:0.2f}".format(round(price_for_250*float(estimate[1]),2))+"\n"
 
         count_str = f"{bitcoin.getblockcount():,d}"
         tweet += "Block height: "+ count_str+"\n"
-        tweet += "Mempool depth: "+str(int(mempool_info["bytes"]/1000/1000))
+        tweet += "Mempool depth: "+str(int(mempool_info["bytes"]/1000/1000))+"\n"
+        tweet += "#Beyondcoin $BYND #GoBeyond"
 
     except Exception as e:
         print("Couldn't estimate. Sleeping: {}".format(str(e)))

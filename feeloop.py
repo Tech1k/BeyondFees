@@ -42,7 +42,7 @@ while True:
 
         count_str = f"{bitcoin.getblockcount():,d}"
         tweet += "Block height: "+ count_str+"\n"
-        tweet += "Mempool depth: "+str(int(mempool_info["bytes"]/1000/1000))+"\n"
+        tweet += "Mempool size (kB): "+str(int(mempool_info["bytes"]/1000))+"\n"
         tweet += "#Beyondcoin $BYND #GoBeyond"
 
     except Exception as e:
